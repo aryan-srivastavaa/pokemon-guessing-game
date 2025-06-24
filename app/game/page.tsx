@@ -7,6 +7,8 @@ import { OrbitControls, useGLTF } from '@react-three/drei';
 import { Suspense } from 'react';
 import { FiRotateCcw } from 'react-icons/fi';
 import Link from 'next/link';
+import * as THREE from 'three';
+
 const pokemons = [
     'charmander', 'eevee', 'bulbasaur', 'haunter',
     'jigglypuff', 'snorlax', 'magikarp', 'mew', 'pikachu',
@@ -15,7 +17,7 @@ const pokemons = [
 
 function PokemonModel({ name }: { name: string }) {
     const { scene } = useGLTF(`/models/${name}.glb`);
-    const ref = useRef<any>(null);
+const ref = useRef<THREE.Group | null>(null);
     useFrame(() => {
         if (ref.current) {
             ref.current.rotation.y += 0.005;
